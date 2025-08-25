@@ -15,12 +15,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // User
-Route::middleware(['auth','role:user'])->group(function() {
-    Route::get('/user/dashboard', [UserController::class, 'dashboard']);
+Route::middleware('role:user')->group(function(){
+    Route::get('/user/dashboard', [UserController::class,'dashboard']);
 });
 
 // Admin
-Route::middleware(['auth','role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-    Route::post('/admin/product', [AdminController::class, 'store']);
+Route::middleware('role:admin')->group(function(){
+    Route::get('/admin/dashboard', [AdminController::class,'dashboard']);
+    Route::post('/admin/products', [AdminController::class,'store']);
 });
